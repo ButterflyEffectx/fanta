@@ -729,26 +729,58 @@
         }
 
         function createFloatingHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.textContent = '❤️';
-            heart.style.left = Math.random() * window.innerWidth + 'px';
-            heart.style.top = window.innerHeight / 2 + 'px';
-            document.body.appendChild(heart);
-
-            setTimeout(() => heart.remove(), 2000);
+            // สร้างหัวใจหลายดวงกระจาย
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.textContent = '❤️';
+                    
+                    // สุ่มตำแหน่งกระจายทั่วหน้าจอ
+                    const randomX = Math.random() * window.innerWidth;
+                    const randomY = Math.random() * window.innerHeight;
+                    
+                    heart.style.left = randomX + 'px';
+                    heart.style.top = randomY + 'px';
+                    
+                    // สุ่มขนาดหัวใจ
+                    const randomSize = 2 + Math.random() * 2; // 2-4em
+                    heart.style.fontSize = randomSize + 'em';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 100);
+            }
         }
 
         function createBrokenHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'broken-heart';
-            heart.textContent = '💔';
-            heart.style.left = '50%';
-            heart.style.top = '50%';
-            heart.style.transform = 'translate(-50%, -50%)';
-            document.body.appendChild(heart);
-
-            setTimeout(() => heart.remove(), 1000);
+            // สร้างหัวใจแตกหลายดวงกระจาย
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'broken-heart';
+                    heart.textContent = '💔';
+                    
+                    // สุ่มตำแหน่งรอบ ๆ ตรงกลาง
+                    const centerX = window.innerWidth / 2;
+                    const centerY = window.innerHeight / 2;
+                    const randomOffsetX = (Math.random() - 0.5) * 400; // กระจาย ±200px
+                    const randomOffsetY = (Math.random() - 0.5) * 400;
+                    
+                    heart.style.left = (centerX + randomOffsetX) + 'px';
+                    heart.style.top = (centerY + randomOffsetY) + 'px';
+                    heart.style.transform = 'translate(-50%, -50%)';
+                    
+                    // สุ่มขนาด
+                    const randomSize = 3 + Math.random() * 2; // 3-5em
+                    heart.style.fontSize = randomSize + 'em';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 1000);
+                }, i * 80);
+            }
         }
 
         function shakeScreen() {
@@ -860,3 +892,4 @@
 
 
 </html>
+
